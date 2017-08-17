@@ -26,6 +26,8 @@ cmd_parser.add_option("-e", "--exclude", type="string", action = "store", dest =
 
 command = [ 'salt-run', 'manage.status' ]
 down_servers = ""
+count_down_servers = 0
+count_up_servers = 0
 
 try:
   child = subprocess.Popen(command, stdout=subprocess.PIPE)
@@ -50,16 +52,21 @@ try:
       match = re.match(cmd_options.exclude, server)
       if match is None:
         down_servers += server + " "
+        count_down_servers += 1
     else:
       down_servers += server + " "
+      count_down_servers += 1
 except:
   print "OK"
+  print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers) 
   exit(0)
 
 if down_servers:
   print "CRITICAL: " + down_servers
+  print "|up=" + str(count_up_servers) + " down=" + str(count_down_servers)
   exit(2)
 else:
   print "OK"
+  print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers) 
   exit(0)
 
