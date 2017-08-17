@@ -29,6 +29,7 @@ down_servers = ""
 count_down_servers = 0
 count_up_servers = 0
 
+
 try:
   child = subprocess.Popen(command, stdout=subprocess.PIPE)
   output = child.communicate()[0]
@@ -51,18 +52,24 @@ try:
     if cmd_options.exclude:
       match = re.match(cmd_options.exclude, server)
       if match is None:
-        down_servers += server + " "
         count_down_servers += 1
+        down_servers += server + "\n"
     else:
-      down_servers += server + " "
       count_down_servers += 1
+      down_servers += server + "\n"
+  for server in yaml_out['up']:
+    count_up_servers += 1
 except:
   print "OK"
   print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers) 
   exit(0)
 
 if down_servers:
-  print "CRITICAL: " + down_servers
+  if count_down_servers > 1:
+    print "CRITICAL: " + str(count_down_servers) + " Servers Down\n"
+  else:
+    print "CRITICAL: " + str(count_down_servers) + " Server Down\n"
+  print down_servers
   print "|up=" + str(count_up_servers) + " down=" + str(count_down_servers)
   exit(2)
 else:
