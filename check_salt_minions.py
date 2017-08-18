@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+#  vim:ts=4:sts=4:sw=4:et
 '''
 Project     :       Icinga/Nagios salt-minion down check
-Version     :       0.1
+Version     :       0.2
 Author      :       Will Platnick <wplatnick@gmail.com>
 Summary     :       This program is an icinga/nagios plugin that is run from the salt-master to return a list of down minions
 Dependency  :       Python 2.6, Linux, Icinga/Nagios
@@ -61,7 +62,7 @@ try:
     count_up_servers += 1
 except:
   print "OK"
-  print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers) 
+  print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers)
   exit(0)
 
 if down_servers:
@@ -74,6 +75,5 @@ if down_servers:
   exit(2)
 else:
   print "OK"
-  print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers) 
+  print "|up=" + str(count_up_servers) + " down=" + str(count_up_servers)
   exit(0)
-
