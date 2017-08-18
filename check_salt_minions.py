@@ -25,7 +25,7 @@ cmd_parser = OptionParser(version = "0.1")
 cmd_parser.add_option("-e", "--exclude", type="string", action = "store", dest = "exclude", help = "Exclude regex", metavar = "Exclude")
 (cmd_options, cmd_args) = cmd_parser.parse_args()
 
-command = [ 'salt-run', 'manage.status' ]
+command = [ '/usr/bin/sudo', 'salt-run', 'manage.status' ]
 down_servers = ""
 count_down_servers = 0
 count_up_servers = 0
